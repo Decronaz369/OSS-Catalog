@@ -19,7 +19,7 @@ function HomePage() {
 
   return (
     <>
-      <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden bg-neutral-950 select-none">
+      <div className="relative flex h-full w-screen items-center justify-center overflow-hidden bg-neutral-950 select-none">
         <ViewPage currentIndex={currentIndex} />
         <Products
           showProducts={showProducts}
