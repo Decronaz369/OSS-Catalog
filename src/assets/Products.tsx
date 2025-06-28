@@ -98,7 +98,7 @@ function Products({
   return (
     <>
       <div
-        className={`fixed inset-0 h-screen w-screen items-center justify-center backdrop-blur-xs backdrop-brightness-60 ${showProducts ? "flex" : "hidden"}`}
+        className={`fixed inset-0 h-dvh w-screen items-center justify-center backdrop-blur-xs backdrop-brightness-60 ${showProducts ? "flex" : "hidden"}`}
       >
         <div className="flex shrink scale-75 flex-col items-center justify-center select-none sm:scale-60 md:scale-55 lg:scale-100">
           <div className="mb-4 flex h-10 items-end text-center text-3xl font-extrabold tracking-wider text-neutral-50 text-shadow-lg/20">
