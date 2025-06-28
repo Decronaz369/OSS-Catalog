@@ -146,7 +146,7 @@ function HomePage() {
         </a>
       </div>
 
-      <div className="absolute bottom-0.5 left-1/2 size-11 -translate-x-1/2 cursor-pointer rounded-t-full border-8 bg-neutral-950 select-none sm:size-12">
+      <div className="absolute bottom-0.5 left-1/2 size-11 -translate-x-1/2 cursor-pointer rounded-t-full border-neutral-950 border-8 bg-neutral-950 select-none sm:size-12">
         <img src={Indo} alt="" className="h-full rounded-full" />
         <img src={UK} alt="" className="hidden h-full rounded-full" />
       </div>
