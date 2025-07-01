@@ -132,7 +132,7 @@ function Products({
           </div>
         </div>
         <div
-          className="absolute z-100 left-0 flex h-80 w-[calc(50%-7.75rem)] items-center justify-end sm:w-[calc(50%-6rem)] md:w-[calc(50%-5.5rem)] lg:w-[calc(50%-11rem)]"
+          className="absolute left-0 flex h-80 w-[calc(50%-7.75rem)] items-center justify-end sm:w-[calc(50%-6rem)] md:w-[calc(50%-5.5rem)] lg:w-[calc(50%-11rem)]"
           onClick={handleLeftClick}
         >
           <div className="flex aspect-square size-10 scale-75 cursor-pointer items-center justify-center rounded-full border border-b-4 border-neutral-300 bg-white bg-gradient-to-r from-neutral-200 via-neutral-50 to-neutral-200 font-semibold text-gray-800 shadow-lg shadow-neutral-700/50 transition duration-100 ease-in-out hover:scale-105 hover:brightness-95 sm:scale-60 md:scale-55 lg:scale-100">
