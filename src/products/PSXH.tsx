@@ -21,12 +21,14 @@ import PSXH_4_Size from "/PSXH-Size/PSXH 4.png";
 import PSXH_5_Size from "/PSXH-Size/PSXH 5.png";
 import PSXH_6_Size from "/PSXH-Size/PSXH 6.png";
 import PSXH_7_Size from "/PSXH-Size/PSXH 7.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function PSXH() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [
     PSXH101,
@@ -105,7 +107,12 @@ function PSXH() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         PSXH

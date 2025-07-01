@@ -94,12 +94,14 @@ import A252BT_GGCBK_Size from "/WASTAFEL-Size/A252BT-GGCBK.png";
 import A252F9F36_GRG_MSR_Size from "/WASTAFEL-Size/A252F9F36-GRG-MSR.png";
 import A524BL_GRG_Size from "/WASTAFEL-Size/A524BL-GRG.png";
 import A424_GG_R_Size from "/WASTAFEL-Size/A424-GG-R.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function CBXHNW() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [
     Z003,
@@ -279,7 +281,12 @@ function CBXHNW() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         WASTAFEL

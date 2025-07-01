@@ -8,12 +8,14 @@ import CLMWP7_Size from "/LIST-Size/LIST CLMWP7 2.jpg";
 import CLMWP8_Size from "/LIST-Size/LIST CLMWP8 2.jpg";
 import CLMWP9_Size from "/LIST-Size/LIST CLMWP9 2.jpg";
 import CLMWP13_Size from "/LIST-Size/LIST CLMWP13 2.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function LIST() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [CLMWP4, CLMWP7, CLMWP8, CLMWP9, CLMWP13];
 
@@ -47,7 +49,12 @@ function LIST() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         CLMWP

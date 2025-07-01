@@ -48,12 +48,14 @@ import WPLY22_Size from "/WPLY-Size/WPLY22.jpg";
 import WPLY23_Size from "/WPLY-Size/WPLY23.jpg";
 import WPLY24_Size from "/WPLY-Size/WPLY24.jpg";
 import WPLY25_Size from "/WPLY-Size/WPLY25.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function WPLY() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [
     WPLY01,
@@ -148,7 +150,12 @@ function WPLY() {
             onClick={() => setZoomProducts(idx)}
             key={idx}
           >
-            <img key={idx} src={src} alt={ProductsLabel[idx]} className="pointer-events-none" />
+            <img
+              key={idx}
+              src={src}
+              alt={ProductsLabel[idx]}
+              className="pointer-events-none"
+            />
             <div className="flex w-full flex-1 items-center justify-center px-5 text-center text-xs font-extrabold sm:text-lg">
               {ProductsLabel[idx]}
             </div>
@@ -159,7 +166,12 @@ function WPLY() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         WPLY
@@ -170,8 +182,8 @@ function WPLY() {
             className="absolute top-10 right-10 flex size-10 rotate-45 cursor-pointer items-center justify-center rounded-full transition duration-100 ease-in-out hover:bg-neutral-400/10"
             onClick={() => setZoomProducts(null)}
           >
-            <div className="absolute h-6 w-0.75 bg-neutral-300 rounded-full"></div>
-            <div className="absolute h-0.75 w-6 bg-neutral-300 rounded-full"></div>
+            <div className="absolute h-6 w-0.75 rounded-full bg-neutral-300"></div>
+            <div className="absolute h-0.75 w-6 rounded-full bg-neutral-300"></div>
           </div>
           <div className="flex h-full w-full flex-col items-center justify-center gap-5 px-15 sm:flex-row sm:gap-10 sm:px-[calc(3rem+14vw)]">
             <div className="aspect-square w-full max-w-60 rounded-lg border-6 border-white shadow-xl sm:w-auto sm:max-w-max">

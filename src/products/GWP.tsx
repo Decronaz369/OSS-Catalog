@@ -16,12 +16,14 @@ import GWP07_Size from "/GWP-Size/WPC_GWP1507_2.jpg";
 import GWP08_Size from "/GWP-Size/WPC_GWP1508_2.jpg";
 import GWP10_Size from "/GWP-Size/WPC_GWP1510_2.jpg";
 import GWP13_Size from "/GWP-Size/WPC_GWP1513_2.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function GWP() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [
     GWP01,
@@ -79,7 +81,12 @@ function GWP() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         GWP

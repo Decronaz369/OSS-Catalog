@@ -28,12 +28,14 @@ import WPXH12_Size from "/WPXH-Size/WPC_WPXH12_2.jpg";
 import WPXH13_Size from "/WPXH-Size/WPC_WPXH13_2.jpg";
 import WPXH14_Size from "/WPXH-Size/WPC_WPXH14_2.jpg";
 import WPXH15_Size from "/WPXH-Size/WPC_WPXH15_2.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function WPXH() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [
     WPXH01,
@@ -109,7 +111,12 @@ function WPXH() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         WPXH

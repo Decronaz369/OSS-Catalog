@@ -4,12 +4,14 @@ import CBXHNW09 from "/CBXHNW/WP_TEXTURE-CBXHNW09_0.jpg";
 import CBXHNW06_Size from "/CBXHNW-Size/WP_TEXTURE-CBXHNW06_2.jpg";
 import CBXHNW08_Size from "/CBXHNW-Size/WP_TEXTURE-CBXHNW08_2.jpg";
 import CBXHNW09_Size from "/CBXHNW-Size/WP_TEXTURE-CBXHNW09_2.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function CBXHNW() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [CBXHNW06, CBXHNW08, CBXHNW09];
 
@@ -37,7 +39,12 @@ function CBXHNW() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         CBXHNW

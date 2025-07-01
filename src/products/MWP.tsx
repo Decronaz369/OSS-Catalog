@@ -8,12 +8,14 @@ import MWP07_Size from "/MWP-Size/WPC_MWP07_2.jpg";
 import MWP08_Size from "/MWP-Size/WPC_MWP08_2.jpg";
 import MWP09_Size from "/MWP-Size/WPC_MWP09_2.png";
 import MWP13_Size from "/MWP-Size/WPC_MWP13_2.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function MWP() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [MWP04, MWP07, MWP08, MWP09, MWP13];
 
@@ -47,7 +49,12 @@ function MWP() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         MWP

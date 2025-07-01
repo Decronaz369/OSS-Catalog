@@ -6,12 +6,14 @@ import CBXH01_Size from "/CBXH-Size/WP_MIRROR-CBXH01_2.jpg";
 import CBXH02_Size from "/CBXH-Size/WP_MIRROR-CBXH02_2.jpg";
 import CBXH03_Size from "/CBXH-Size/WP_MIRROR-CBXH03_2.jpg";
 import CBXH04_Size from "/CBXH-Size/WP_MIRROR-CBXH04_2.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
 function CBXH() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
+  const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [CBXH01, CBXH02, CBXH03, CBXH04];
 
@@ -49,7 +51,12 @@ function CBXH() {
         ))}
       </div>
       <div className="absolute top-17.5 left-1/2 -translate-1/2">
-        <img src={Logo} alt="Logo" className="h-7" />
+        <img
+          src={Logo}
+          alt="Logo"
+          className="h-7 cursor-pointer"
+          onClick={() => setShowProducts && setShowProducts(true)}
+        />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         CBXH
