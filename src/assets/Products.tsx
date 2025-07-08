@@ -116,7 +116,7 @@ function Products({
                 onClick={() =>
                   idx === currentIndex ? setShowProducts(false) : null
                 }
-                className={`rounded-xl shadow-lg transition-all duration-300 ease-in-out ${
+                className={`aspect-square rounded-xl shadow-lg transition-all duration-300 ease-in-out ${
                   idx === currentIndex
                     ? "cursor-pointer border-4 border-white p-2 hover:brightness-75"
                     : "scale-80 border-transparent brightness-50"

@@ -131,13 +131,13 @@ function WPXH() {
             <div className="absolute h-0.75 w-6 bg-neutral-300 rounded-full"></div>
           </div>
           <div className="flex h-full w-full flex-col items-center justify-center gap-5 px-15 sm:flex-row sm:gap-10 sm:px-[calc(3rem+14vw)]">
-            <div className="aspect-square w-full max-w-60 rounded-lg border-6 border-white shadow-xl sm:w-auto sm:max-w-max">
+            <div className="aspect-square w-full max-w-60 rounded-lg border-6 border-white shadow-xl sm:w-auto sm:max-w-100">
               <img
                 src={ProductsArray[zoomProducts]}
                 alt={ProductsLabel[zoomProducts]}
               />
             </div>
-            <div className="aspect-square w-full max-w-60 rounded-lg border-6 border-white shadow-xl sm:w-auto sm:max-w-max">
+            <div className="aspect-square w-full max-w-60 rounded-lg border-6 border-white shadow-xl sm:w-auto sm:max-w-100">
               <img
                 src={ProductsSizeArray[zoomProducts]}
                 alt={ProductsLabel[zoomProducts]}
