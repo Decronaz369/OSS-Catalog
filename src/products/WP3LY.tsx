@@ -13,10 +13,61 @@ import WP3LY14 from "/WP3LY/WP3LY14.jpg";
 import WP3LY15 from "/WP3LY/WP3LY15.jpg";
 import WP3LY16 from "/WP3LY/WP3LY16.jpg";
 import WP3LY17 from "/WP3LY/WP3LY17.jpg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
+
+type LazyImageProps = {
+  src: string;
+  alt: string;
+  className?: string;
+};
+
+const LazyImage = ({ src, alt, className }: LazyImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [inView, setInView] = useState(false);
+  const imgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!imgRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "100px",
+        threshold: 0.01,
+      },
+    );
+
+    observer.observe(imgRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={imgRef} className="relative">
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-gray-900"></div>
+        </div>
+      )}
+      {inView && (
+        <img
+          src={src}
+          alt={alt}
+          className={`${className} ${isLoaded ? "opacity-100" : "opacity-0"}`}
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
+    </div>
+  );
+};
 
 function WP3LY() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
@@ -67,8 +118,7 @@ function WP3LY() {
             onClick={() => setZoomProducts(idx)}
             key={idx}
           >
-            <img
-              key={idx}
+            <LazyImage
               src={src}
               alt={ProductsLabel[idx]}
               className="pointer-events-none"
