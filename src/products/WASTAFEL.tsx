@@ -99,7 +99,7 @@ import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
 
-function CBXHNW() {
+function WASTAFEL() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
   const setShowProducts = useContext(ShowProductsContext);
 
@@ -256,6 +256,17 @@ function CBXHNW() {
     "A424-GG-R",
   ];
 
+  const [loadedImages, setLoadedImages] = useState<boolean[]>(
+    Array(ProductsArray.length).fill(false),
+  );
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prev) => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
+
   return (
     <>
       <div className="relative grid w-full grid-cols-[repeat(auto-fit,_37.5vw)] justify-center gap-[4vw] overflow-y-auto px-4 py-30 sm:grid-cols-[repeat(auto-fit,_12rem)] sm:gap-12 sm:px-20 md:grid-cols-[repeat(auto-fit,_14rem)] [&::-webkit-scrollbar]:hidden">
@@ -269,7 +280,10 @@ function CBXHNW() {
               key={idx}
               src={src}
               alt={ProductsLabel[idx]}
-              className="pointer-events-none"
+              className={`pointer-events-none ${
+                loadedImages[idx] ? "blur-none" : "blur-xl"
+              }`}
+              onLoad={() => handleImageLoad(idx)}
             />
             <div className="flex w-full flex-1 items-center justify-center px-5 text-center text-xs font-extrabold sm:text-lg">
               {ProductsLabel[idx]}
@@ -320,4 +334,4 @@ function CBXHNW() {
   );
 }
 
-export default CBXHNW;
+export default WASTAFEL;
