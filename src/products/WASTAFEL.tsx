@@ -94,10 +94,61 @@ import A252BT_GGCBK_Size from "/WASTAFEL-Size/A252BT-GGCBK.png";
 import A252F9F36_GRG_MSR_Size from "/WASTAFEL-Size/A252F9F36-GRG-MSR.png";
 import A524BL_GRG_Size from "/WASTAFEL-Size/A524BL-GRG.png";
 import A424_GG_R_Size from "/WASTAFEL-Size/A424-GG-R.png";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
 import Logo from "/Logo OSS.png";
+
+type LazyImageProps = {
+  src: string;
+  alt: string;
+  className?: string;
+};
+
+const LazyImage = ({ src, alt, className }: LazyImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [inView, setInView] = useState(false);
+  const imgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!imgRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "100px",
+        threshold: 0.01,
+      },
+    );
+
+    observer.observe(imgRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={imgRef} className="relative">
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-gray-900"></div>
+        </div>
+      )}
+      {inView && (
+        <img
+          src={src}
+          alt={alt}
+          className={`${className} ${isLoaded ? "opacity-100" : "opacity-0"}`}
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
+    </div>
+  );
+};
 
 function WASTAFEL() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
@@ -265,8 +316,7 @@ function WASTAFEL() {
             onClick={() => setZoomProducts(idx)}
             key={idx}
           >
-            <img
-              key={idx}
+            <LazyImage
               src={src}
               alt={ProductsLabel[idx]}
               className="pointer-events-none"
