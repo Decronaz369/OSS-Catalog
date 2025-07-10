@@ -170,7 +170,7 @@ function PSXH() {
         />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
-        PSXH
+        Wall Panel
       </div>
       {zoomProducts !== null && (
         <div className="fixed inset-0 flex size-full items-center justify-center backdrop-blur-xs backdrop-brightness-50">
