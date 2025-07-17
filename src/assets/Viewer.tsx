@@ -1,6 +1,7 @@
 import LivingRoom from "/Living Room.jpg";
 import WPLY from "../products/WPLY";
 import SPC from "../products/SPC";
+import FKUV from "../products/FKUV";
 import FKCB from "../products/FKCB";
 import FKS from "../products/FKS";
 import WP3LY from "../products/WP3LY";
@@ -35,6 +36,7 @@ function ViewPage({ currentIndex }: ViewPageProps) {
     <WPDXH />,
     <LIST />,
     <SPC />,
+    <FKUV />,
     <FKCB />,
     <CBXH />,
     <CBXHNW />,

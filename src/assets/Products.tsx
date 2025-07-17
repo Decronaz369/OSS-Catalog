@@ -1,6 +1,7 @@
 import { FaRegHandPointUp, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import SampulWPLY from "/Sampul Produk/Sampul WPLY.jpg";
 import SampulSPC from "/Sampul Produk/Sampul SPC.jpg";
+import SampulFKUV from "/Sampul Produk/Sampul FKUV.png";
 import SampulFKCB from "/Sampul Produk/Sampul FKCB.jpg";
 import SampulWP3LY from "/Sampul Produk/Sampul WP3LY.jpg";
 import SampulFKS from "/Sampul Produk/Sampul FKS.jpg";
@@ -15,7 +16,7 @@ import SampulGWP from "/Sampul Produk/Sampul GWP.jpg";
 import SampulMWP from "/Sampul Produk/Sampul MWP.jpg";
 import SampulPSXH from "/Sampul Produk/Sampul PSXH.png";
 import SampulWASTAFEL from "/Sampul Produk/Sampul WASTAFEL.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface ProductsProps {
   showProducts: boolean;
@@ -44,6 +45,7 @@ function Products({
     SampulWPDXH,
     SampulLIST,
     SampulSPC,
+    SampulFKUV,
     SampulFKCB,
     SampulCBXH,
     SampulCBXHNW,
@@ -51,25 +53,25 @@ function Products({
 
   const imageLabels = [
     "Wastafel",
-    "Panel Dinding WPC - WPLY",
-    "Panel Dinding WPC - WPXH",
-    "Panel Dinding WPC - MWP",
-    "Panel Dinding WPC - PSXH",
-    "Panel Dinding WPC - WP3LY",
-    "Panel Dinding WPC - WPSLY",
-    "Panel Dinding WPC - WPLXH",
-    "Panel Dinding WPC - GWP",
-    "Panel Dinding WPC - FKS",
-    "Panel Dinding WPC (Oval) - WPDXH",
-    "LIST WPC - CLMWP",
+    "Wall Panel WPC - WPLY",
+    "Wall Panel WPC - WPXH",
+    "Wall Panel WPC - MWP",
+    "Wall Panel WPC - PSXH",
+    "Wall Panel WPC - WP3LY",
+    "Wall Panel WPC - WPSLY",
+    "Wall Panel WPC - WPLXH",
+    "Wall Panel WPC - GWP",
+    "Wall Panel WPC - FKS",
+    "Wall Panel WPC (Oval) - WPDXH",
+    "List WPC - CLMWP",
     "Lantai SPC",
-    "Panel Dinding (Arang) - FKCB",
-    "Panel Dinding Mirror (Arang) - CBXH",
-    "Panel Dinding Tekstur (Arang) - CBXHNW",
+    "Wall Panel UV - FKUV",
+    "Wall Panel (Arang) - FKCB",
+    "Wall Panel Mirror (Arang) - CBXH",
+    "Wall Panel Texture (Arang) - CBXHNW",
   ];
 
   const translateX = currentIndex * 20;
-
   useEffect(() => {
     if (!showProducts) return;
 
@@ -85,6 +87,33 @@ function Products({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [showProducts, setCurrentIndex, imageArray.length]);
 
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      handleRightClick();
+    } else if (touchEnd - touchStart > 50) {
+      handleLeftClick();
+    }
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.deltaY > 0) {
+      handleRightClick();
+    } else if (e.deltaY < 0) {
+      handleLeftClick();
+    }
+  };
+
   const handleRightClick = () => {
     setCurrentIndex((prev: number) =>
       Math.min(prev + 1, imageArray.length - 1),
@@ -99,6 +128,10 @@ function Products({
     <>
       <div
         className={`fixed inset-0 h-dvh w-screen items-center justify-center backdrop-blur-xs backdrop-brightness-60 ${showProducts ? "flex" : "hidden"}`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onWheel={handleWheel}
       >
         <div className="flex shrink scale-75 flex-col items-center justify-center select-none sm:scale-60 md:scale-55 lg:scale-100">
           <div className="mb-4 flex h-10 items-end text-center text-3xl font-extrabold tracking-wider text-neutral-50 text-shadow-lg/20">

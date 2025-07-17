@@ -1,21 +1,23 @@
-import GWP01 from "/GWP/WPC_GWP1501_1.jpg";
-import GWP02 from "/GWP/WPC_GWP1502_1.jpg";
-import GWP03 from "/GWP/WPC_GWP1503_1.jpg";
-import GWP04 from "/GWP/WPC_GWP1504_1.jpg";
-import GWP06 from "/GWP/WPC_GWP1506_1.jpg";
-import GWP07 from "/GWP/WPC_GWP1507_1.jpg";
-import GWP08 from "/GWP/WPC_GWP1508_1.jpg";
-import GWP10 from "/GWP/WPC_GWP1510_1.jpg";
-import GWP13 from "/GWP/WPC_GWP1513_1.jpg";
-import GWP01_Size from "/GWP-Size/WPC_GWP1501_2.jpg";
-import GWP02_Size from "/GWP-Size/WPC_GWP1502_2.jpg";
-import GWP03_Size from "/GWP-Size/WPC_GWP1503_2.jpg";
-import GWP04_Size from "/GWP-Size/WPC_GWP1504_2.jpg";
-import GWP06_Size from "/GWP-Size/WPC_GWP1506_2.jpg";
-import GWP07_Size from "/GWP-Size/WPC_GWP1507_2.jpg";
-import GWP08_Size from "/GWP-Size/WPC_GWP1508_2.jpg";
-import GWP10_Size from "/GWP-Size/WPC_GWP1510_2.jpg";
-import GWP13_Size from "/GWP-Size/WPC_GWP1513_2.jpg";
+import FKUV01 from "/FKUV/FKUV001.jpg";
+import FKUV02 from "/FKUV/FKUV002.jpg";
+import FKUV03 from "/FKUV/FKUV003.jpg";
+import FKUV04 from "/FKUV/FKUV004.jpg";
+import FKUV05 from "/FKUV/FKUV005.jpg";
+import FKUV06 from "/FKUV/FKUV006.jpg";
+import FKUV07 from "/FKUV/FKUV007.jpg";
+import FKUV08 from "/FKUV/FKUV008.jpg";
+import FKUV09 from "/FKUV/FKUV009.jpg";
+import FKUV10 from "/FKUV/FKUV010.jpg";
+import FKUV01_Size from "/FKUV-Size/FKUV001.jpg";
+import FKUV02_Size from "/FKUV-Size/FKUV002.jpg";
+import FKUV03_Size from "/FKUV-Size/FKUV003.jpg";
+import FKUV04_Size from "/FKUV-Size/FKUV004.jpg";
+import FKUV05_Size from "/FKUV-Size/FKUV005.jpg";
+import FKUV06_Size from "/FKUV-Size/FKUV006.jpg";
+import FKUV07_Size from "/FKUV-Size/FKUV007.jpg";
+import FKUV08_Size from "/FKUV-Size/FKUV008.jpg";
+import FKUV09_Size from "/FKUV-Size/FKUV009.jpg";
+import FKUV10_Size from "/FKUV-Size/FKUV010.jpg";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ShowProductsContext } from "../assets/Navigator";
 import { FaExpand } from "react-icons/fa";
@@ -72,44 +74,47 @@ const LazyImage = ({ src, alt, className }: LazyImageProps) => {
   );
 };
 
-function GWP() {
+function FKUV() {
   const [zoomProducts, setZoomProducts] = useState<number | null>(null);
   const setShowProducts = useContext(ShowProductsContext);
 
   const ProductsArray = [
-    GWP01,
-    GWP02,
-    GWP03,
-    GWP04,
-    GWP06,
-    GWP07,
-    GWP08,
-    GWP10,
-    GWP13,
+    FKUV01,
+    FKUV02,
+    FKUV03,
+    FKUV04,
+    FKUV05,
+    FKUV06,
+    FKUV07,
+    FKUV08,
+    FKUV09,
+    FKUV10,
   ];
 
   const ProductsSizeArray = [
-    GWP01_Size,
-    GWP02_Size,
-    GWP03_Size,
-    GWP04_Size,
-    GWP06_Size,
-    GWP07_Size,
-    GWP08_Size,
-    GWP10_Size,
-    GWP13_Size,
+    FKUV01_Size,
+    FKUV02_Size,
+    FKUV03_Size,
+    FKUV04_Size,
+    FKUV05_Size,
+    FKUV06_Size,
+    FKUV07_Size,
+    FKUV08_Size,
+    FKUV09_Size,
+    FKUV10_Size,
   ];
 
   const ProductsLabel = [
-    "GWP01",
-    "GWP02",
-    "GWP03",
-    "GWP04",
-    "GWP06",
-    "GWP07",
-    "GWP08",
-    "GWP10",
-    "GWP13",
+    "FKUV01",
+    "FKUV02",
+    "FKUV03",
+    "FKUV04",
+    "FKUV05",
+    "FKUV06",
+    "FKUV07",
+    "FKUV08",
+    "FKUV09",
+    "FKUV10",
   ];
 
   return (
@@ -144,7 +149,7 @@ function GWP() {
         />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
-        Wall Panel
+        Papan UV
       </div>
       {zoomProducts !== null && (
         <div className="fixed inset-0 flex size-full items-center justify-center backdrop-blur-xs backdrop-brightness-50">
@@ -175,4 +180,4 @@ function GWP() {
   );
 }
 
-export default GWP;
+export default FKUV;
