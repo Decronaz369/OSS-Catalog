@@ -101,7 +101,7 @@ function CBXHNW() {
           onClick={() => setShowProducts && setShowProducts(true)}
         />
       </div>
-      <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
+      <div className="pointer-events-none absolute bottom-15 flex px-5 text-center text-4xl font-extrabold text-neutral-600 mix-blend-difference">
         Papan Wall Panel (Texture) Charcoal
       </div>
       {zoomProducts !== null && (

@@ -16,7 +16,7 @@ import SampulGWP from "/Sampul Produk/Sampul GWP.jpg";
 import SampulMWP from "/Sampul Produk/Sampul MWP.jpg";
 import SampulPSXH from "/Sampul Produk/Sampul PSXH.png";
 import SampulWASTAFEL from "/Sampul Produk/Sampul WASTAFEL.png";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface ProductsProps {
   showProducts: boolean;
@@ -87,25 +87,6 @@ function Products({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [showProducts, setCurrentIndex, imageArray.length]);
 
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 50) {
-      handleRightClick();
-    } else if (touchEnd - touchStart > 50) {
-      handleLeftClick();
-    }
-  };
-
   const handleWheel = (e: React.WheelEvent) => {
     if (e.deltaY > 0) {
       handleRightClick();
@@ -128,9 +109,6 @@ function Products({
     <>
       <div
         className={`fixed inset-0 h-dvh w-screen items-center justify-center backdrop-blur-xs backdrop-brightness-60 ${showProducts ? "flex" : "hidden"}`}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
         onWheel={handleWheel}
       >
         <div className="flex shrink scale-75 flex-col items-center justify-center select-none sm:scale-60 md:scale-55 lg:scale-100">
