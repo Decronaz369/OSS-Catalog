@@ -109,7 +109,7 @@ function CBXH() {
         />
       </div>
       <div className="pointer-events-none absolute bottom-15 flex text-4xl font-extrabold text-neutral-600 mix-blend-difference">
-        Charcoal Board
+        Papan Wall Panel (Mirror) Charcoal
       </div>
       {zoomProducts !== null && (
         <div className="fixed inset-0 flex size-full items-center justify-center backdrop-blur-xs backdrop-brightness-50">
@@ -117,8 +117,8 @@ function CBXH() {
             className="absolute top-10 right-10 flex size-10 rotate-45 cursor-pointer items-center justify-center rounded-full transition duration-100 ease-in-out hover:bg-neutral-400/10"
             onClick={() => setZoomProducts(null)}
           >
-            <div className="absolute h-6 w-0.75 bg-neutral-300 rounded-full"></div>
-            <div className="absolute h-0.75 w-6 bg-neutral-300 rounded-full"></div>
+            <div className="absolute h-6 w-0.75 rounded-full bg-neutral-300"></div>
+            <div className="absolute h-0.75 w-6 rounded-full bg-neutral-300"></div>
           </div>
           <div className="flex h-full w-full flex-col items-center justify-center gap-5 px-15 sm:flex-row sm:gap-10 sm:px-[calc(3rem+14vw)]">
             <div className="aspect-square w-full max-w-60 shadow-xl sm:w-auto sm:max-w-100">
