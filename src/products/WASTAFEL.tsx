@@ -1,7 +1,3 @@
-import { useContext, useEffect, useState } from "react";
-import { ShowProductsContext } from "../assets/Navigator";
-import { FaExpand } from "react-icons/fa";
-import Logo from "/Logo OSS.png";
 import Z003 from "/WASTAFEL/Z003.png";
 import Z004 from "/WASTAFEL/Z004.png";
 import A759 from "/WASTAFEL/A759.png";
@@ -98,61 +94,57 @@ import A252BT_GGCBK_Size from "/WASTAFEL-Size/A252BT-GGCBK.png";
 import A252F9F36_GRG_MSR_Size from "/WASTAFEL-Size/A252F9F36-GRG-MSR.png";
 import A524BL_GRG_Size from "/WASTAFEL-Size/A524BL-GRG.png";
 import A424_GG_R_Size from "/WASTAFEL-Size/A424-GG-R.png";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ShowProductsContext } from "../assets/Navigator";
+import { FaExpand } from "react-icons/fa";
+import Logo from "/Logo OSS.png";
 
-const ProgressiveImage = ({ src, alt }: { src: string; alt: string }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [lowResSrc, setLowResSrc] = useState<string | null>(null);
+type LazyImageProps = {
+  src: string;
+  alt: string;
+  className?: string;
+};
+
+const LazyImage = ({ src, alt, className }: LazyImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [inView, setInView] = useState(false);
+  const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const createLowResImage = () => {
-      const img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.src = src;
+    if (!imgRef.current) return;
 
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "100px",
+        threshold: 0.01,
+      },
+    );
 
-        canvas.width = Math.max(1, img.width * 0.1);
-        canvas.height = Math.max(1, img.height * 0.1);
+    observer.observe(imgRef.current);
 
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-        setLowResSrc(canvas.toDataURL("image/jpeg", 0.1));
-      };
-    };
-
-    createLowResImage();
-  }, [src]);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="relative flex w-full flex-1 items-center justify-center">
-      {lowResSrc && (
-        <img
-          src={lowResSrc}
-          alt={`${alt} (low quality)`}
-          className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-500 ${
-            loaded ? "opacity-0" : "opacity-100"
-          }`}
-        />
-      )}
-
-      <img
-        src={src}
-        alt={alt}
-        className={`h-full w-full object-contain transition-all duration-500 ${
-          loaded ? "blur-0 opacity-100" : "opacity-0 blur-sm"
-        }`}
-        onLoad={() => setLoaded(true)}
-        loading="lazy"
-      />
-
-      {!lowResSrc && (
-        <div className="absolute inset-0 flex animate-pulse items-center justify-center bg-gray-200">
-          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-gray-700" />
+    <div ref={imgRef} className="relative">
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-gray-900"></div>
         </div>
+      )}
+      {inView && (
+        <img
+          src={src}
+          alt={alt}
+          className={`${className} ${isLoaded ? "opacity-100" : "opacity-0"}`}
+          onLoad={() => setIsLoaded(true)}
+        />
       )}
     </div>
   );
@@ -324,7 +316,11 @@ function WASTAFEL() {
             onClick={() => setZoomProducts(idx)}
             key={idx}
           >
-            <ProgressiveImage src={src} alt={ProductsLabel[idx]} />
+            <LazyImage
+              src={src}
+              alt={ProductsLabel[idx]}
+              className="pointer-events-none"
+            />
             <div className="flex w-full flex-1 items-center justify-center px-5 text-center text-xs font-extrabold sm:text-lg">
               {ProductsLabel[idx]}
             </div>
